@@ -1,13 +1,24 @@
 import { useQuiz } from '@/context/QuizContext'
 
 const StartScreen = () => {
-  const { name, setName, setScreen } = useQuiz()
+  const { name, setName, setScreen, isDark , toggleTheme } = useQuiz()
+
 
   return (
-    <div className="min-h-screen bg-[#F8F8FC] flex items-center justify-center p-3 sm:p-6">
+  <div
+  className={`min-h-screen flex items-center justify-center p-3 sm:p-6 transition-all duration-500 ${
+    isDark ? "bg-[#0F0B1F]" : "bg-[#F8F8FC]"
+  }`}
+>
 
       {/* Main Container */}
-      <div className="w-full max-w-6xl bg-white rounded-[2rem] overflow-hidden shadow-[0_20px_80px_rgba(83,74,183,0.12)] border border-zinc-100 flex flex-col lg:flex-row min-h-[90vh]">
+     <div
+  className={`w-full max-w-6xl rounded-[2rem] overflow-hidden shadow-[0_20px_80px_rgba(83,74,183,0.12)] border flex flex-col lg:flex-row min-h-[90vh] transition-all duration-500 ${
+    isDark
+      ? "bg-[#18122B] border-[#2A1F4A]"
+      : "bg-white border-zinc-100"
+  }`}
+>
 
         {/* Left Side */}
         <div className="flex-1 flex flex-col">
@@ -20,10 +31,12 @@ const StartScreen = () => {
                 ReactIQ
               </span>
             </div>
-
-            <button className="w-10 h-10 rounded-full bg-[#EEEDFE] flex items-center justify-center text-[#534AB7] text-sm hover:scale-105 transition">
-              ⚙
-            </button>
+            <button
+  onClick={toggleTheme}
+  className={`w-10 h-10 rounded-full flex items-center justify-center hover:scale-105 transition ${isDark ? "bg-[#18122B] border border-[#2A1F4A]" : "bg-white"}`}
+>
+  {isDark ? "☀️" : "🌙"}
+</button>
           </div>
 
           {/* Mobile Hero */}
@@ -47,12 +60,19 @@ const StartScreen = () => {
                 🚀 Knowledge is Power
               </span>
 
-              <h1 className="text-3xl sm:text-5xl font-bold text-zinc-900 leading-tight mb-4">
+              <h1
+  className={`text-3xl sm:text-5xl font-bold leading-tight mb-4 ${
+    isDark ? "text-white" : "text-zinc-900"
+  }`}
+>
                 React JS
                 <span className="text-[#534AB7]"> Mastery Quiz</span>
               </h1>
-
-              <p className="text-sm sm:text-base text-zinc-500 leading-relaxed mb-8 max-w-lg">
+<p
+  className={`text-sm sm:text-base leading-relaxed mb-8 max-w-lg ${
+    isDark ? "text-zinc-400" : "text-zinc-500"
+  }`}
+>
                 Challenge yourself with interactive React questions covering hooks,
                 components, state management, JSX, and the virtual DOM.
               </p>

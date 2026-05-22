@@ -11,6 +11,8 @@ const [name, setName] = useState("")
 const [screen, setScreen] = useState("start")
 const [currentQ, setCurrentQ] = useState(0)
 const [score, setScore] = useState(0)
+const [isDark, setIsDark] = useState(false)
+const toggleTheme = () => setIsDark(!isDark)
 
 
 const handleAnswer = async (selected) => {
@@ -41,7 +43,7 @@ const restart = () => {
 
 return (
     <QuizContext.Provider
-    value={{name, setName, screen, setScreen, currentQ, score, handleAnswer, restart}}
+    value={{name, setName, screen, setScreen, currentQ, score, handleAnswer, restart ,isDark, toggleTheme}}
     > 
         {children}
     </QuizContext.Provider>
