@@ -1,7 +1,8 @@
 import { useQuiz } from '@/context/QuizContext'
 import { questions } from '../data/questions'
 import { useState, useEffect } from 'react'
-
+import BottomNav from './BottomNav'
+import Navbar from './Navbar'
 const letters = ["A", "B", "C", "D"]
 
 const QuestionScreen = () => {
@@ -31,12 +32,7 @@ const QuestionScreen = () => {
         {/* Left Side */}
         <div className="flex-1 flex flex-col">
 
-          {/* Navbar */}
-          <div className={`flex items-center justify-between px-5 sm:px-7 py-5 border-b ${isDark ? "border-zinc-700" : "border-zinc-100"}`}>
-            <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-[#534AB7]"></div>
-              <span className="text-sm sm:text-base font-semibold text-[#534AB7]">ReactIQ</span>
-            </div>
+        <Navbar/>
 
             {/* Timer mobile */}
             <div className={`md:hidden flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold ${timeLeft <= 5 ? "bg-red-100 text-red-500" : "bg-[#EEEDFE] text-[#534AB7]"}`}>
@@ -122,27 +118,13 @@ const QuestionScreen = () => {
 
           </div>
 
-          {/* Bottom Nav */}
-          <div className={`border-t px-4 py-3 mt-auto ${isDark ? "border-zinc-700 bg-zinc-800" : "border-zinc-100 bg-white"}`}>
-            <div className="max-w-sm mx-auto flex justify-around items-center">
-              <button className="flex flex-col items-center gap-1">
-                <span className="text-[#534AB7] text-xl">⌂</span>
-                <div className="w-1.5 h-1.5 rounded-full bg-[#534AB7]"></div>
-              </button>
-              <button className="flex flex-col items-center gap-1">
-                <span className="text-zinc-300 text-xl">▦</span>
-              </button>
-              <button className="flex flex-col items-center gap-1">
-                <span className="text-zinc-300 text-xl">⚙</span>
-              </button>
-            </div>
-          </div>
+    <BottomNav/>
 
         </div>
 
         {/* Right Side Desktop */}
-        <div className="hidden lg:flex flex-1 bg-gradient-to-br from-[#534AB7] via-[#6B63FF] to-[#938DFF] relative overflow-hidden items-center justify-center">
-          <div className="absolute w-[550px] h-[550px] rounded-full bg-white/10 blur-3xl"></div>
+        <div className="hidden lg:flex flex-1 bg-linear-to-br from-[#534AB7] via-[#6B63FF] to-[#938DFF] relative overflow-hidden items-center justify-center">
+          <div className="absolute w-137.5 h-137.5 rounded-full bg-white/10 blur-3xl"></div>
           <div className="absolute top-10 left-10 w-36 h-36 border border-white/20 rounded-full"></div>
           <div className="absolute bottom-10 right-10 w-52 h-52 border border-white/10 rounded-full"></div>
 
@@ -176,7 +158,7 @@ const QuestionScreen = () => {
         </div>
 
       </div>
-    </div>
+  
   )
 }
 

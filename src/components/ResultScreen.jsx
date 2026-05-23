@@ -1,52 +1,57 @@
 import { useQuiz } from '@/context/QuizContext'
 import { questions } from '../data/questions'
-
+import BottomNav from './BottomNav'
+import Navbar from './Navbar'
 
 const ResultScreen = () => {
-  const { name, score, restart , setScreen} = useQuiz()
+
+  const {
+    name,
+    score,
+    restart,
+    setScreen,
+    isDark
+  } = useQuiz()
 
   const percentage = Math.round((score / questions.length) * 100)
 
   const getTitle = () => {
     if (percentage >= 80) return "React Specialist! 🏆"
     if (percentage >= 60) return "Good Job! 👏"
-    return "Keep Practicing! "
+    return "Keep Practicing!"
   }
 
   const getMessage = () => {
     if (percentage >= 80)
-      return "You've shown a strong grasp of React fundamentals. Your understanding of hooks and components is impressive."
+      return "You've shown a strong grasp of React fundamentals."
 
     if (percentage >= 60)
-      return "You have a decent understanding of React. Keep learning and you'll master it soon!"
+      return "You have a decent understanding of React."
 
-    return "Don't give up! Review the concepts and try again. Practice makes perfect."
+    return "Don't give up! Practice makes perfect."
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F8FC] flex items-center justify-center p-3 sm:p-6">
+
+    <div
+      className={`min-h-screen flex items-center justify-center p-3 sm:p-6 transition-all duration-500 ${
+        isDark ? "bg-[#0F0B1F]" : "bg-[#F8F8FC]"
+      }`}
+    >
 
       {/* Main Layout */}
-      <div className="w-full max-w-6xl min-h-[90vh] bg-white rounded-[2rem] overflow-hidden shadow-[0_20px_80px_rgba(83,74,183,0.12)] border border-zinc-100 flex flex-col lg:flex-row">
+      <div
+        className={`w-full max-w-6xl min-h-[90vh] rounded-[2rem] overflow-hidden shadow-[0_20px_80px_rgba(83,74,183,0.12)] border flex flex-col lg:flex-row transition-all duration-500 ${
+          isDark
+            ? "bg-[#18122B] border-[#2A1F4A]"
+            : "bg-white border-zinc-100"
+        }`}
+      >
 
         {/* Left Side */}
         <div className="flex-1 flex flex-col">
 
-          {/* Navbar */}
-          <div className="flex items-center justify-between px-5 sm:px-7 py-5 border-b border-zinc-100">
-
-            <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-[#534AB7]"></div>
-              <span className="text-sm sm:text-base font-semibold text-[#534AB7]">
-              ReactIQ
-              </span>
-            </div>
-
-            <button className="w-10 h-10 rounded-full bg-[#EEEDFE] flex items-center justify-center text-[#534AB7] hover:scale-105 transition">
-              ⚙
-            </button>
-
-          </div>
+          <Navbar />
 
           {/* Content */}
           <div className="flex-1 flex flex-col justify-center px-5 sm:px-8 py-8">
@@ -58,12 +63,23 @@ const ResultScreen = () => {
                 🎉 Quiz Completed
               </div>
 
-              <h1 className="text-3xl sm:text-5xl font-bold text-zinc-900 mb-3">
+              <h1
+                className={`text-3xl sm:text-5xl font-bold mb-3 ${
+                  isDark ? "text-white" : "text-zinc-900"
+                }`}
+              >
                 Well Done,
-                <span className="text-[#534AB7]"> {name || "Player"}</span>
+                <span className="text-[#534AB7]">
+                  {" "}
+                  {name || "Player"}
+                </span>
               </h1>
 
-              <p className="text-zinc-500 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
+              <p
+                className={`text-sm sm:text-base leading-relaxed max-w-xl mx-auto ${
+                  isDark ? "text-zinc-400" : "text-zinc-500"
+                }`}
+              >
                 {getMessage()}
               </p>
 
@@ -74,7 +90,6 @@ const ResultScreen = () => {
 
               <div className="relative w-52 h-52 flex items-center justify-center">
 
-                {/* Glow */}
                 <div className="absolute inset-0 bg-[#534AB7]/10 blur-3xl rounded-full"></div>
 
                 <svg
@@ -83,7 +98,7 @@ const ResultScreen = () => {
                   height="208"
                   viewBox="0 0 208 208"
                 >
-                  {/* Background */}
+
                   <circle
                     cx="104"
                     cy="104"
@@ -93,7 +108,6 @@ const ResultScreen = () => {
                     strokeWidth="14"
                   />
 
-                  {/* Progress */}
                   <circle
                     cx="104"
                     cy="104"
@@ -113,12 +127,16 @@ const ResultScreen = () => {
                       <stop offset="100%" stopColor="#8B84FF" />
                     </linearGradient>
                   </defs>
+
                 </svg>
 
-                {/* Center */}
                 <div className="relative z-10 text-center">
 
-                  <p className="text-5xl font-bold text-zinc-900">
+                  <p
+                    className={`text-5xl font-bold ${
+                      isDark ? "text-white" : "text-zinc-900"
+                    }`}
+                  >
                     {percentage}%
                   </p>
 
@@ -137,26 +155,48 @@ const ResultScreen = () => {
             </div>
 
             {/* Result Card */}
-            <div className="bg-gradient-to-br from-[#F7F6FF] to-[#EEEDFE] border border-[#E5E2FF] rounded-3xl p-5 sm:p-6 mb-8">
+            <div
+              className={`rounded-3xl p-5 sm:p-6 mb-8 border transition-all duration-500 ${
+                isDark
+                  ? "bg-[#221A36] border-[#31224F]"
+                  : "bg-gradient-to-br from-[#F7F6FF] to-[#EEEDFE] border-[#E5E2FF]"
+              }`}
+            >
 
               <div className="flex items-start justify-between gap-4 flex-wrap">
 
                 <div>
+
                   <p className="text-xs uppercase tracking-[0.2em] text-[#7A73D8] mb-2">
                     Final Result
                   </p>
 
-                  <h2 className="text-2xl font-bold text-[#3C3489] mb-2">
+                  <h2
+                    className={`text-2xl font-bold mb-2 ${
+                      isDark ? "text-white" : "text-[#3C3489]"
+                    }`}
+                  >
                     {getTitle()}
                   </h2>
 
-                  <p className="text-sm text-[#6D66C9] leading-relaxed max-w-lg">
-                    You completed the React quiz successfully. Continue
-                    practicing consistently to become even better.
+                  <p
+                    className={`text-sm leading-relaxed max-w-lg ${
+                      isDark ? "text-zinc-400" : "text-[#6D66C9]"
+                    }`}
+                  >
+                    You completed the React quiz successfully.
                   </p>
+
                 </div>
 
-                <div className="bg-white rounded-2xl px-5 py-4 shadow-sm border border-[#E5E2FF]">
+                <div
+                  className={`rounded-2xl px-5 py-4 shadow-sm border ${
+                    isDark
+                      ? "bg-[#18122B] border-[#31224F]"
+                      : "bg-white border-[#E5E2FF]"
+                  }`}
+                >
+
                   <p className="text-xs text-zinc-400 uppercase tracking-wide mb-1">
                     Your Score
                   </p>
@@ -167,6 +207,7 @@ const ResultScreen = () => {
                       /{questions.length}
                     </span>
                   </p>
+
                 </div>
 
               </div>
@@ -178,100 +219,68 @@ const ResultScreen = () => {
 
               <button
                 onClick={restart}
-                className="flex-1 h-14 rounded-2xl bg-[#534AB7] hover:bg-[#453cb0] text-white font-semibold text-sm sm:text-base py-2 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#534AB7]/20"
+                className="flex-1 h-14 rounded-2xl bg-[#534AB7] hover:bg-[#453cb0] text-white font-semibold text-sm sm:text-base py-2 transition-all hover:scale-[1.02]"
               >
                 Play Again →
               </button>
-                <button
-                className="flex-1 h-14 rounded-2xl bg-[#534AB7] hover:bg-[#453cb0] text-white font-semibold text-sm sm:text-base py-2 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#534AB7]/20"
-                onClick={() => setScreen("leaderboard")}>
-                  View Leaderboard 🏆
-                    </button>
+
+              <button
+                className="flex-1 h-14 rounded-2xl bg-[#534AB7] hover:bg-[#453cb0] text-white font-semibold text-sm sm:text-base py-2 transition-all hover:scale-[1.02]"
+                onClick={() => setScreen("leaderboard")}
+              >
+                View Leaderboard 🏆
+              </button>
 
             </div>
 
             {/* Stats */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
 
-              <div className="border border-zinc-100 rounded-2xl p-4 bg-zinc-50">
-                <p className="text-xs uppercase tracking-wide text-zinc-400 mb-2">
-                  Accuracy
-                </p>
+              {[ 
+                { label: "Accuracy", value: `${percentage}%` },
+                { label: "Correct", value: score },
+                { label: "Wrong", value: questions.length - score },
+                { label: "Total", value: questions.length },
+              ].map((item, index) => (
 
-                <p className="text-2xl font-bold text-zinc-900">
-                  {percentage}%
-                </p>
-              </div>
+                <div
+                  key={index}
+                  className={`rounded-2xl p-4 border transition-all duration-500 ${
+                    isDark
+                      ? "bg-[#221A36] border-[#31224F]"
+                      : "bg-zinc-50 border-zinc-100"
+                  }`}
+                >
 
-              <div className="border border-zinc-100 rounded-2xl p-4 bg-zinc-50">
-                <p className="text-xs uppercase tracking-wide text-zinc-400 mb-2">
-                  Correct
-                </p>
+                  <p className="text-xs uppercase tracking-wide text-zinc-400 mb-2">
+                    {item.label}
+                  </p>
 
-                <p className="text-2xl font-bold text-zinc-900">
-                  {score}
-                </p>
-              </div>
+                  <p
+                    className={`text-2xl font-bold ${
+                      isDark ? "text-white" : "text-zinc-900"
+                    }`}
+                  >
+                    {item.value}
+                  </p>
 
-              <div className="border border-zinc-100 rounded-2xl p-4 bg-zinc-50">
-                <p className="text-xs uppercase tracking-wide text-zinc-400 mb-2">
-                  Wrong
-                </p>
+                </div>
 
-                <p className="text-2xl font-bold text-zinc-900">
-                  {questions.length - score}
-                </p>
-              </div>
-
-              <div className="border border-zinc-100 rounded-2xl p-4 bg-zinc-50">
-                <p className="text-xs uppercase tracking-wide text-zinc-400 mb-2">
-                  Total
-                </p>
-
-                <p className="text-2xl font-bold text-zinc-900">
-                  {questions.length}
-                </p>
-              </div>
+              ))}
 
             </div>
 
           </div>
 
-          {/* Bottom Nav */}
-          <div className="border-t border-zinc-100 px-4 py-3 bg-white mt-auto">
-
-            <div className="max-w-sm mx-auto flex justify-around items-center">
-
-              <button className="flex flex-col items-center gap-1">
-                <span className="text-zinc-300 text-xl">⌂</span>
-              </button>
-
-              <button className="flex flex-col items-center gap-1">
-                <span className="text-[#534AB7] text-xl">▦</span>
-                <div className="w-1.5 h-1.5 rounded-full bg-[#534AB7]"></div>
-              </button>
-
-              <button className="flex flex-col items-center gap-1">
-                <span className="text-zinc-300 text-xl">⚙</span>
-              </button>
-
-            </div>
-
-          </div>
+          <BottomNav />
 
         </div>
 
-        {/* Desktop Right Side */}
+        {/* Desktop Right */}
         <div className="hidden lg:flex flex-1 bg-gradient-to-br from-[#534AB7] via-[#6C63FF] to-[#938DFF] relative overflow-hidden items-center justify-center">
 
-          {/* Glow */}
           <div className="absolute w-[600px] h-[600px] rounded-full bg-white/10 blur-3xl"></div>
 
-          {/* Floating Shapes */}
-          <div className="absolute top-10 left-10 w-36 h-36 border border-white/20 rounded-full"></div>
-          <div className="absolute bottom-10 right-10 w-52 h-52 border border-white/10 rounded-full"></div>
-
-          {/* Card */}
           <div className="relative z-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[2rem] p-10 w-[78%] text-white shadow-2xl">
 
             <div className="text-7xl mb-6">
@@ -286,50 +295,12 @@ const ResultScreen = () => {
               {percentage}%
             </h2>
 
-            <p className="text-white/80 text-sm leading-relaxed mb-8">
-              Your React knowledge is improving with every challenge.
-              Keep learning, building, and practicing consistently.
-            </p>
-
-            {/* Stats */}
-            <div className="space-y-4">
-
-              <div className="bg-white/10 border border-white/10 rounded-2xl p-4 flex items-center justify-between">
-                <span className="text-white/70 text-sm">
-                  Correct Answers
-                </span>
-
-                <span className="font-semibold text-lg">
-                  {score}
-                </span>
-              </div>
-
-              <div className="bg-white/10 border border-white/10 rounded-2xl p-4 flex items-center justify-between">
-                <span className="text-white/70 text-sm">
-                  Total Questions
-                </span>
-
-                <span className="font-semibold text-lg">
-                  {questions.length}
-                </span>
-              </div>
-
-              <div className="bg-white/10 border border-white/10 rounded-2xl p-4 flex items-center justify-between">
-                <span className="text-white/70 text-sm">
-                  Accuracy
-                </span>
-
-                <span className="font-semibold text-lg">
-                  {percentage}%
-                </span>
-              </div>
-
-            </div>
-
           </div>
+
         </div>
 
       </div>
+
     </div>
   )
 }

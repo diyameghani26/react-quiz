@@ -1,4 +1,6 @@
 import { useQuiz } from '@/context/QuizContext'
+import Navbar from './Navbar'
+import BottomNav from './BottomNav'
 
 const StartScreen = () => {
   const { name, setName, setScreen, isDark , toggleTheme } = useQuiz()
@@ -23,21 +25,7 @@ const StartScreen = () => {
         {/* Left Side */}
         <div className="flex-1 flex flex-col">
 
-          {/* Nav */}
-          <div className="flex items-center justify-between px-5 sm:px-7 py-5 border-b border-zinc-100">
-            <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-[#534AB7]"></div>
-              <span className="text-sm sm:text-base font-semibold text-[#534AB7] tracking-tight">
-                ReactIQ
-              </span>
-            </div>
-            <button
-  onClick={toggleTheme}
-  className={`w-10 h-10 rounded-full flex items-center justify-center hover:scale-105 transition ${isDark ? "bg-[#18122B] border border-[#2A1F4A]" : "bg-white"}`}
->
-  {isDark ? "☀️" : "🌙"}
-</button>
-          </div>
+        <Navbar/>
 
           {/* Mobile Hero */}
           <div className="lg:hidden px-5 pt-5">
@@ -123,24 +111,8 @@ const StartScreen = () => {
           </div>
 
           {/* Bottom Nav */}
-          <div className="border-t border-zinc-100 px-4 py-3 bg-white mt-auto">
-            <div className="max-w-sm mx-auto flex justify-around items-center">
-
-              <button className="flex flex-col items-center gap-1">
-                <span className="text-[#534AB7] text-xl">⌂</span>
-                <div className="w-1.5 h-1.5 rounded-full bg-[#534AB7]"></div>
-              </button>
-
-              <button className="flex flex-col items-center gap-1">
-                <span className="text-zinc-300 text-xl">▦</span>
-              </button>
-
-              <button className="flex flex-col items-center gap-1">
-                <span className="text-zinc-300 text-xl">⚙</span>
-              </button>
-
-            </div>
-          </div>
+    <BottomNav/>
+    
         </div>
 
         {/* Desktop Right Side */}
