@@ -15,6 +15,7 @@ const Screens = () => {
 
 const App = () => {
   return (
+    
     <QuizProvider>
       <Screens/>
     </QuizProvider>

@@ -7,6 +7,8 @@ const letters = ["A", "B", "C", "D"]
 const QuestionScreen = () => {
   const { currentQ, handleAnswer, isDark, toggleTheme } = useQuiz()
   const [timeLeft, setTimeLeft] = useState(15)
+const [selectedAnswer, setSelectedAnswer] = useState(null)
+
 
   useEffect(() => {
     setTimeLeft(15)
@@ -98,28 +100,71 @@ const QuestionScreen = () => {
             </p>
 
             {/* Options */}
-            <div className="grid gap-4">
-              {questions[currentQ].options.map((option, index) => (
-                <button
-                  key={option}
-                  onClick={() => handleAnswer(option)}
-                  className={`group relative overflow-hidden border rounded-2xl p-4 sm:p-5 transition-all duration-300 hover:border-[#534AB7] hover:shadow-lg hover:shadow-[#534AB7]/10 hover:-translate-y-1 text-left ${isDark ? "bg-zinc-700 border-zinc-600" : "bg-white border-zinc-200"}`}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#EEEDFE]/0 via-[#EEEDFE]/60 to-[#EEEDFE]/0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="relative flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#EEEDFE] text-[#534AB7] flex items-center justify-center font-semibold text-sm flex-shrink-0 group-hover:scale-110 transition-transform">
-                      {letters[index]}
-                    </div>
-                    <div className="flex-1">
-                      <p className={`text-sm sm:text-base leading-relaxed transition-colors ${isDark ? "text-zinc-200 group-hover:text-white" : "text-zinc-700 group-hover:text-zinc-900"}`}>
-                        {option}
-                      </p>
-                    </div>
-                    <div className="text-zinc-300 group-hover:text-[#534AB7] transition-colors text-lg">→</div>
-                  </div>
-                </button>
-              ))}
-            </div>
+           <div className="grid gap-4">
+  {questions[currentQ].options.map((option, index) => {
+
+    const isCorrect = option === questions[currentQ].answer
+    const isSelected = selectedAnswer === option
+
+    return (
+      <button
+        key={option}
+        onClick={() => {
+          if (selectedAnswer) return
+
+          setSelectedAnswer(option)
+
+          setTimeout(() => {
+            handleAnswer(option)
+            setSelectedAnswer(null)
+          }, 1000)
+        }}
+        className={`group relative overflow-hidden border rounded-2xl p-4 sm:p-5 transition-all duration-300 text-left
+
+        ${
+          selectedAnswer
+            ? isCorrect
+              ? "border-green-500 bg-green-50"
+              : isSelected
+              ? "border-red-500 bg-red-50"
+              : isDark
+              ? "bg-zinc-700 border-zinc-600"
+              : "bg-white border-zinc-200"
+            : isDark
+            ? "bg-zinc-700 border-zinc-600 hover:border-[#534AB7]"
+            : "bg-white border-zinc-200 hover:border-[#534AB7] hover:shadow-lg hover:shadow-[#534AB7]/10 hover:-translate-y-1"
+        }`}
+      >
+
+        <div className="absolute inset-0 bg-linear-to-r from-[#EEEDFE]/0 via-[#EEEDFE]/60 to-[#EEEDFE]/0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+        <div className="relative flex items-start gap-4">
+
+          <div className="w-10 h-10 rounded-xl bg-[#EEEDFE] text-[#534AB7] flex items-center justify-center font-semibold text-sm shrink-0 group-hover:scale-110 transition-transform">
+            {letters[index]}
+          </div>
+
+          <div className="flex-1">
+            <p
+              className={`text-sm sm:text-base leading-relaxed transition-colors ${
+                isDark
+                  ? "text-zinc-200 group-hover:text-white"
+                  : "text-zinc-700 group-hover:text-zinc-900"
+              }`}
+            >
+              {option}
+            </p>
+          </div>
+
+          <div className="text-zinc-300 group-hover:text-[#534AB7] transition-colors text-lg">
+            →
+          </div>
+
+        </div>
+      </button>
+    )
+  })}
+</div>
 
             {/* Bottom Actions */}
             <div className="mt-auto pt-8 flex items-center justify-between gap-3 flex-wrap">
@@ -148,7 +193,7 @@ const QuestionScreen = () => {
         </div>
 
         {/* Right Side Desktop */}
-        <div className="hidden lg:flex flex-1 bg-gradient-to-br from-[#534AB7] via-[#6B63FF] to-[#938DFF] relative overflow-hidden items-center justify-center">
+        <div className="hidden lg:flex flex-1 bg-linear-to-br from-[#534AB7] via-[#6B63FF] to-[#938DFF] relative overflow-hidden items-center justify-center">
           <div className="absolute w-[550px] h-[550px] rounded-full bg-white/10 blur-3xl"></div>
           <div className="absolute top-10 left-10 w-36 h-36 border border-white/20 rounded-full"></div>
           <div className="absolute bottom-10 right-10 w-52 h-52 border border-white/10 rounded-full"></div>

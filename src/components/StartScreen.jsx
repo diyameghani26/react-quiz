@@ -1,6 +1,7 @@
 import { useQuiz } from '@/context/QuizContext'
 import Navbar from './Navbar'
 import BottomNav from './BottomNav'
+import Leaderboard from './Leaderboard';
 
 const StartScreen = () => {
   const { name, setName, setScreen, isDark , toggleTheme } = useQuiz()
@@ -99,12 +100,17 @@ const StartScreen = () => {
                   </p>
                 </div>
 
-                <div className="bg-zinc-50 border border-zinc-100 rounded-2xl px-5 py-4 min-w-30">
+
+
+                <div
+                onClick={() => setScreen("leaderboard")}
+            className="bg-zinc-50 border border-zinc-100 rounded-2xl px-5 py-4 min-w-30">
                   <p className="text-2xl font-bold text-zinc-900">+50</p>
                   <p className="text-xs text-zinc-400 uppercase tracking-wider mt-1">
                     Players
                   </p>
                 </div>
+                
 
               </div>
             </div>
@@ -112,7 +118,7 @@ const StartScreen = () => {
 
           {/* Bottom Nav */}
     <BottomNav/>
-    
+
         </div>
 
         {/* Desktop Right Side */}
