@@ -159,7 +159,7 @@ const ResultScreen = () => {
               className={`rounded-3xl p-5 sm:p-6 mb-8 border transition-all duration-500 ${
                 isDark
                   ? "bg-[#221A36] border-[#31224F]"
-                  : "bg-gradient-to-br from-[#F7F6FF] to-[#EEEDFE] border-[#E5E2FF]"
+                  : "bg-linear-to-br from-[#F7F6FF] to-[#EEEDFE] border-[#E5E2FF]"
               }`}
             >
 
@@ -277,9 +277,9 @@ const ResultScreen = () => {
         </div>
 
         {/* Desktop Right */}
-        <div className="hidden lg:flex flex-1 bg-gradient-to-br from-[#534AB7] via-[#6C63FF] to-[#938DFF] relative overflow-hidden items-center justify-center">
+        <div className="hidden lg:flex flex-1 bg-linear-to-br from-[#534AB7] via-[#6C63FF] to-[#938DFF] relative overflow-hidden items-center justify-center">
 
-          <div className="absolute w-[600px] h-[600px] rounded-full bg-white/10 blur-3xl"></div>
+          <div className="absolute w-150 h-150 rounded-full bg-white/10 blur-3xl"></div>
 
           <div className="relative z-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[2rem] p-10 w-[78%] text-white shadow-2xl">
 
