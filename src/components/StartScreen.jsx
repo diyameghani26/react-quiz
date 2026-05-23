@@ -76,7 +76,14 @@ const StartScreen = () => {
                 />
 
                 <button
-                  onClick={() => setScreen("question")}
+                    onClick={() => {
+    if(name.trim() === "") {
+      alert("Please enter your name")
+      return
+    }
+
+    setScreen("question")
+  }}
                   className="h-14 px-8 rounded-2xl bg-[#534AB7] hover:bg-[#453cb0] text-white text-sm sm:text-base font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#534AB7]/20"
                 >
                   Start Quiz →

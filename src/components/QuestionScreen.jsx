@@ -1,6 +1,7 @@
 import { useQuiz } from '@/context/QuizContext'
 import { questions } from '../data/questions'
 import { useState, useEffect } from 'react'
+import Navbar from './Navbar'
 
 const letters = ["A", "B", "C", "D"]
 
@@ -33,32 +34,7 @@ const [selectedAnswer, setSelectedAnswer] = useState(null)
         {/* Left Side */}
         <div className="flex-1 flex flex-col">
 
-          {/* Navbar */}
-          <div className={`flex items-center justify-between px-5 sm:px-7 py-5 border-b ${isDark ? "border-zinc-700" : "border-zinc-100"}`}>
-
-            {/* Logo */}
-            <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-[#534AB7]"></div>
-              <span className="text-sm sm:text-base font-semibold text-[#534AB7]">ReactIQ</span>
-            </div>
-
-            {/* Right side */}
-            <div className="flex items-center gap-3">
-
-              {/* Timer — sirf mobile pe */}
-              <div className={`md:hidden flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold ${timeLeft <= 5 ? "bg-red-100 text-red-500" : "bg-[#EEEDFE] text-[#534AB7]"}`}>
-                ⏱ {timeLeft}s
-              </div>
-
-              {/* Dark mode button */}
-              <button
-                onClick={toggleTheme}
-                className="w-10 h-10 rounded-full bg-[#EEEDFE] flex items-center justify-center text-[#534AB7] hover:scale-105 transition">
-                {isDark ? "☀️" : "🌙"}
-              </button>
-
-            </div>
-          </div>
+      <Navbar/>
 
           {/* Content */}
           <div className="flex-1 flex flex-col px-5 sm:px-8 py-6 sm:py-8">
