@@ -43,7 +43,7 @@ const Leaderboard = () => {
         </span>
 
         <h1
-          className={`text-2xl md:text-4xl font-semibold ${
+          className={`text-4xl md:text-4xl font-semibold ${
             isDark ? "text-white" : "text-zinc-800"
           }`}
         >
@@ -168,14 +168,19 @@ const Leaderboard = () => {
                 key={index}
                 className={`flex items-center gap-3 px-5 py-4 rounded-xl border transition-all ${
                   index === 0
-                    ? "border-[#534AB7] bg-[#28254f]"
+                    ? "border-[#534AB7] bg-[#d0cef5]"
                     : isDark
                     ? "border-zinc-700 bg-[#18122B]"
                     : "border-zinc-100 bg-zinc-200"
                 }`}
               >
 
-                <span className="text-lg w-7 text-center text-white">
+                <span className={`text-lg w-7 text-center
+                
+                ${
+                      isDark ? "text-white" : "text-black"
+                    }
+                `}>
                   {index < 3 ? medals[index] : `${index + 1}`}
                 </span>
 
