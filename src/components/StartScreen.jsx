@@ -2,10 +2,16 @@ import { useQuiz } from '@/context/QuizContext'
 import Navbar from './Navbar'
 import BottomNav from './BottomNav'
 import Leaderboard from './Leaderboard';
+import { useEffect , useRef} from 'react';
 
 const StartScreen = () => {
   const { name, setName, setScreen, isDark , toggleTheme } = useQuiz()
 
+  const nameRef = useRef(null)
+
+  useEffect(()=>{
+    nameRef.current.focus()
+  },[])
 
   return (
   <div
@@ -69,6 +75,8 @@ const StartScreen = () => {
               {/* Input */}
               <div className="flex flex-col sm:flex-row gap-3 mb-8">
                 <input
+                 
+                  ref = {nameRef}
                   placeholder="Enter your name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
